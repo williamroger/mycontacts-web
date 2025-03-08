@@ -41,45 +41,9 @@ function Home() {
             <span>(81) 99999-9999</span>
           </div>
           <div className="actions">
-            <a href="/">
+            <Link to="/edit/123">
               <img src={Edit} alt="Edit" />
-            </a>
-            <button type="button">
-              <img src={Trash} alt="Delete" />
-            </button>
-          </div>
-        </Card>
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>William Roger</strong>
-              <small>instagram</small>
-            </div>
-            <span>william@email.com</span>
-            <span>(81) 99999-9999</span>
-          </div>
-          <div className="actions">
-            <a href="/">
-              <img src={Edit} alt="Edit" />
-            </a>
-            <button type="button">
-              <img src={Trash} alt="Delete" />
-            </button>
-          </div>
-        </Card>
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>William Roger</strong>
-              <small>instagram</small>
-            </div>
-            <span>william@email.com</span>
-            <span>(81) 99999-9999</span>
-          </div>
-          <div className="actions">
-            <a href="/">
-              <img src={Edit} alt="Edit" />
-            </a>
+            </Link>
             <button type="button">
               <img src={Trash} alt="Delete" />
             </button>
