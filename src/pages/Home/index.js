@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   Container,
   InputSearchContainer,
@@ -19,7 +20,7 @@ function Home() {
 
       <Header>
         <strong>3 contatos</strong>
-        <a href="/">Novo Contato</a>
+        <Link to="/new">Novo Contato</Link>
       </Header>
 
       <ListContainer>
