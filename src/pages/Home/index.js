@@ -10,12 +10,10 @@ import {
 import Arrow from '../../assets/images/icons/arrow.svg';
 import Edit from '../../assets/images/icons/edit.svg';
 import Trash from '../../assets/images/icons/trash.svg';
-import Loader from '../../components/Loader';
 
 function Home() {
   return (
     <Container>
-      <Loader />
       <InputSearchContainer>
         <input type="text" placeholder="Pesquisar contato..." />
       </InputSearchContainer>
