@@ -68,7 +68,7 @@ export const ListHeader = styled.header`
 
     img {
       height: 16px;
-      transform: ${({ orderBy }) => (orderBy === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)')};
+      transform: ${({ orderby }) => (orderby === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)')};
       transition: transform 0.2s ease-in;
     }
   }
