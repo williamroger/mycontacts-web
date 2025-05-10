@@ -27,20 +27,25 @@ export default function Home() {
   )), [contacts, searchTerm]);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
-      .then(async (response) => {
+    async function loadContacts() {
+      try {
+        setIsLoading(true);
+        const response = await fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`);
+
         await delay(500); // simula tempo de resposta da api em 500 milissegundos.
 
         const json = await response.json();
         setContacts(json);
-      })
-      .catch((error) => {
-        console.log('error ', error);
-      })
-      .finally(() => {
+      } catch (error) {
+        console.log('Erro ao carregar os contatos', error);
+      } finally {
         setIsLoading(false);
-      });
+      }
+    }
+
+    loadContacts();
+
+    return () => console.log('cleanup');
   }, [orderBy]);
 
   function handleToggleOrderBy() {

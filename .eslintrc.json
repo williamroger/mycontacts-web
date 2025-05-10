@@ -5,6 +5,7 @@
   },
   "extends": [
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended-legacy",
     "airbnb"
   ],
   "parserOptions": {
@@ -15,7 +16,8 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "react-hooks"
   ],
   "rules": {
     "react/jsx-filename-extension": [
@@ -28,6 +30,8 @@
       }
     ],
     "react/react-in-jsx-scope": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
