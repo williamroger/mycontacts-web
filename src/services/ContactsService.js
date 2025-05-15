@@ -1,14 +1,12 @@
-import delay from '../utils/delay';
+import HttpClient from './utils/HttpClient';
 
 class ContactsService {
+  constructor() {
+    this.httpClient = new HttpClient('http://localhost:3001');
+  }
+
   async loadContacts(orderBy = 'asc') {
-    const response = await fetch(
-      `http://localhost:3001/contacts?orderBy=${orderBy}`,
-    );
-
-    await delay(500); // simula tempo de resposta da api em 500 milissegundos.
-
-    return response.json();
+    return this.httpClient.get(`/contacts?orderBy=${orderBy}`);
   }
 }
 
