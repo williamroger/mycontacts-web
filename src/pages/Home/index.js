@@ -22,9 +22,15 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-  const filteredContacts = useMemo(() => contacts.filter((contact) => (
-    contact.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )), [contacts, searchTerm]);
+  const filteredContacts = useMemo(() => {
+    const test = contacts.filter((contact) => {
+      const filteredData = contact.name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      return filteredData;
+    });
+    return test;
+  }, [contacts, searchTerm]);
 
   useEffect(() => {
     async function loadContacts() {
@@ -69,29 +75,31 @@ export default function Home() {
 
       <Header>
         <strong>
-          {filteredContacts.length}
-          {filteredContacts.length === 1 ? ' contato' : ' contatos'}
+          {filteredContacts?.length}
+          {filteredContacts?.length === 1 ? ' contato' : ' contatos'}
         </strong>
         <Link to="/new">Novo Contato</Link>
       </Header>
 
-      {filteredContacts.length > 0 && (
+      {filteredContacts?.length > 0 && (
         <ListHeader orderby={orderBy}>
-          <button type="button" className="sort-button" onClick={handleToggleOrderBy}>
+          <button
+            type="button"
+            className="sort-button"
+            onClick={handleToggleOrderBy}
+          >
             <span>Nome</span>
             <img src={Arrow} alt="Arrow" />
           </button>
         </ListHeader>
       )}
 
-      {filteredContacts.map((contact) => (
+      {filteredContacts?.map((contact) => (
         <Card key={contact.id}>
           <div className="info">
             <div className="contact-name">
               <strong>{contact.name}</strong>
-              {contact.category_name && (
-              <small>{contact.category_name}</small>
-              )}
+              {contact.category_name && <small>{contact.category_name}</small>}
             </div>
             <span>{contact.email}</span>
             <span>{contact.phone}</span>
