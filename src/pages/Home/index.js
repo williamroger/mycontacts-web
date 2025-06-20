@@ -15,6 +15,7 @@ import Trash from '../../assets/images/icons/trash.svg';
 
 import Loader from '../../components/Loader';
 import ContactsService from '../../services/ContactsService';
+import APIError from '../../errors/APIError';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -41,7 +42,10 @@ export default function Home() {
 
         setContacts(contactsList);
       } catch (error) {
-        console.log('Erro ao carregar os contatos', error);
+        console.log('error name: ', error.name);
+        console.log('error message: ', error.message);
+        console.log('error response: ', error.response);
+        console.log('error body: ', error.body);
       } finally {
         setIsLoading(false);
       }
