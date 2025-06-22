@@ -10,7 +10,7 @@ export const InputSearchContainer = styled.div`
 
   input {
     width: 100%;
-    background-color: #FFF;
+    background-color: #fff;
     border: none;
     border-radius: 25px;
     height: 50px;
@@ -19,7 +19,7 @@ export const InputSearchContainer = styled.div`
     padding: 0 16px;
 
     &::placeholder {
-      color: #BCBCBC;
+      color: #bcbcbc;
     }
   }
 `;
@@ -27,8 +27,11 @@ export const InputSearchContainer = styled.div`
 export const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${({ hasError }) =>
+    hasError ? 'flex-end' : 'space-between'};
   margin-top: 32px;
+  border-bottom: 2px solid ${({ theme }) => theme.colors.gray['100']};
+  padding-bottom: 16px;
 
   strong {
     font-size: 24px;
@@ -68,7 +71,8 @@ export const ListHeader = styled.header`
 
     img {
       height: 16px;
-      transform: ${({ orderby }) => (orderby === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)')};
+      transform: ${({ orderby }) =>
+        orderby === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)'};
       transition: transform 0.2s ease-in;
     }
   }
@@ -123,5 +127,16 @@ export const Card = styled.div`
       border: none;
       margin-left: 8px;
     }
+  }
+`;
+
+export const ErrorContainer = styled.div`
+  margin-top: 16px;
+
+  strong {
+    display: block;
+    font-size: 22px;
+    color: ${({ theme }) => theme.colors.danger.main};
+    margin-bottom: 8px;
   }
 `;
