@@ -9,6 +9,7 @@ import {
   Card,
   ErrorContainer,
   EmptyListContainer,
+  SearchNotFoundContainer,
 } from './styles';
 
 import Button from '../../components/Button';
@@ -120,6 +121,16 @@ export default function Home() {
               </p>
             </EmptyListContainer>
           )}
+
+          {contacts.length > 0 && filteredContacts?.length < 1 && (
+            <SearchNotFoundContainer>
+              <span>
+                Nenhum resultado foi encontrado para
+                <strong>{searchTerm}</strong>
+              </span>
+            </SearchNotFoundContainer>
+          )}
+
           {filteredContacts?.length > 0 && (
             <ListHeader orderby={orderBy}>
               <button
