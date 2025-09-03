@@ -14,6 +14,12 @@ export default styled.select`
   appearance: none;
 
   &:focus {
-    border-color: ${({ theme }) => theme.colors.primary.main}
+    border-color: ${({ theme }) => theme.colors.primary.main};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: ${({ theme }) => theme.colors.gray[100]};
+    border-color: ${({ theme }) => theme.colors.gray[200]};
   }
 `;
