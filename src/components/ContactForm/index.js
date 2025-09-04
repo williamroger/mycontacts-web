@@ -103,7 +103,7 @@ function ContactForm({ buttonLabel }) {
         />
       </FormGroup>
 
-      <FormGroup isLoading={true}>
+      <FormGroup isLoading={isLoadingCategories}>
         <Select
           value={categoryId}
           onChange={(event) => setCategoryId(event.target.value)}
