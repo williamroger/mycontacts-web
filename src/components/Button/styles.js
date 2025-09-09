@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export default styled.button`
+export const StyledButton = styled.button`
   height: 52px;
   padding: 0 16px;
   border: none;
@@ -11,12 +11,17 @@ export default styled.button`
   color: #fff;
   border-radius: 4px;
   transition: background 0.2s ease-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 
   &:hover {
     background: ${({ theme }) => theme.colors.primary.light};
   }
 
-  &:active { // when button is clicked
+  &:active {
+    // when button is clicked
     background: ${({ theme }) => theme.colors.primary.dark};
   }
 
@@ -25,15 +30,18 @@ export default styled.button`
     cursor: default;
   }
 
-  ${({ theme, danger }) => danger && css`
-    background: ${theme.colors.danger.main};
+  ${({ theme, danger }) =>
+    danger &&
+    css`
+      background: ${theme.colors.danger.main};
 
-    &:hover {
-      background: ${theme.colors.danger.light};
-    }
+      &:hover {
+        background: ${theme.colors.danger.light};
+      }
 
-    &:active { // when button is clicked
-      background: ${theme.colors.danger.dark};
-    }
-  `};
+      &:active {
+        // when button is clicked
+        background: ${theme.colors.danger.dark};
+      }
+    `};
 `;

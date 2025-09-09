@@ -22,7 +22,7 @@ class HttpClient {
   }
 
   async makeRequest(path, options) {
-    await delay(500); // simula tempo de resposta da api em 500 milissegundos.
+    await delay(1000); // simula tempo de resposta da api em 500 milissegundos.
 
     const headers = new Headers();
 
