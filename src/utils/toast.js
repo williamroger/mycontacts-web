@@ -1,10 +1,7 @@
-export default function toast({ text, type = 'default' }) {
-  const event = new CustomEvent('addtoast', {
-    detail: {
-      type,
-      text,
-    },
-  });
+import EventManager from '../lib/EventManager';
 
-  document.dispatchEvent(event);
+export const eventManager = new EventManager();
+
+export default function toast({ text, type = 'default' }) {
+  eventManager.emit('addtoast', { text, type });
 }
