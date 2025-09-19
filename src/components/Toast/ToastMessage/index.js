@@ -1,15 +1,23 @@
 import PropTypes from 'prop-types';
 import { Container } from './styles';
 
-export default function ToastMessage({ text, type = 'default' }) {
+export default function ToastMessage({ message, onRemoveMessage }) {
+  function handleRemoveToast() {
+    onRemoveMessage(message.id);
+  }
+
   return (
-    <Container type={type}>
-      <strong>{text}</strong>
+    <Container type={message.type} onClick={handleRemoveToast}>
+      <strong>{message.text}</strong>
     </Container>
   );
 }
 
 ToastMessage.propTypes = {
-  text: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['default', 'danger', 'success']),
+  message: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(['default', 'danger', 'success']),
+  }).isRequired,
+  onRemoveMessage: PropTypes.func.isRequired,
 };
