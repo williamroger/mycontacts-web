@@ -27,6 +27,10 @@ export const Container = styled.div`
     margin-top: 12px;
   }
 
+  &:focus {
+    background-color: purple;
+  }
+
   &:hover {
     cursor: pointer;
   }

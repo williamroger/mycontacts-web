@@ -2,13 +2,20 @@ import PropTypes from 'prop-types';
 import { Container } from './styles';
 
 export default function ToastMessage({ message, onRemoveMessage }) {
+  const { id, text, type = 'default' } = message;
+
   function handleRemoveToast() {
-    onRemoveMessage(message.id);
+    onRemoveMessage(id);
   }
 
   return (
-    <Container type={message.type} onClick={handleRemoveToast}>
-      <strong>{message.text}</strong>
+    <Container
+      type={type}
+      onClick={handleRemoveToast}
+      tabIndex={0}
+      role="button"
+    >
+      <strong>{text}</strong>
     </Container>
   );
 }
