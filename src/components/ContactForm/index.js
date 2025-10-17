@@ -79,6 +79,7 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
     setIsSubmitting(true);
 
     await onSubmit({
@@ -87,11 +88,6 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
       phone: phone.replace(/\D/g, ''),
       categoryId,
     });
-
-    setName('');
-    setEmail('');
-    setPhone('');
-    setCategoryId('');
 
     setIsSubmitting(false);
   }
