@@ -13,11 +13,13 @@ import {
 } from './styles';
 
 import Button from '../../components/Button';
+import Loader from '../../components/Loader';
+import Modal from '../../components/Modal';
+
 import Arrow from '../../assets/images/icons/arrow.svg';
 import Edit from '../../assets/images/icons/edit.svg';
 import Trash from '../../assets/images/icons/trash.svg';
 
-import Loader from '../../components/Loader';
 import ContactsService from '../../services/ContactsService';
 
 export default function Home() {
@@ -71,7 +73,17 @@ export default function Home() {
   return (
     <Container>
       <Loader isLoading={isLoading} />
-
+      <Modal
+        danger
+        title="Tem certeza que deseja remover o contato William Roger?"
+        confirmLabel="Deletar"
+        onCancel={() => alert('Cancelou!')}
+        onConfirm={() => alert('Confirmou!')}
+      >
+        <h1>Modal Title</h1>
+        <h3>Modal Body</h3>
+        <p>teste de modal</p>
+      </Modal>
       {contacts.length > 0 && (
         <InputSearchContainer>
           <input

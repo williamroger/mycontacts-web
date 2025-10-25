@@ -6,10 +6,17 @@ export default function Button({
   type = 'button',
   disabled = false,
   isLoading = false,
+  danger = false,
   children,
+  onClick,
 }) {
   return (
-    <StyledButton type={type} disabled={disabled || isLoading}>
+    <StyledButton
+      onClick={onClick}
+      type={type}
+      disabled={disabled || isLoading}
+      danger={danger}
+    >
       {!isLoading && children}
       {isLoading && <Spinner size={18} />}
     </StyledButton>
@@ -20,5 +27,7 @@ Button.propTypes = {
   type: PropTypes.string,
   disabled: PropTypes.bool,
   isLoading: PropTypes.bool,
+  danger: PropTypes.bool,
   children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
 };
