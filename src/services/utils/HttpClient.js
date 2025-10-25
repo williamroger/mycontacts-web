@@ -29,6 +29,13 @@ class HttpClient {
     });
   }
 
+  delete(path, options) {
+    return this.makeRequest(path, {
+      method: 'DELETE',
+      headers: options?.headers,
+    });
+  }
+
   async makeRequest(path, options) {
     await delay(1000); // simula tempo de resposta da api em 500 milissegundos.
 
@@ -53,7 +60,7 @@ class HttpClient {
     let responseBody = null;
     const contentType = response.headers.get('Content-Type');
 
-    if (contentType && contentType.includes('application/json')) {
+    if (contentType?.includes('application/json')) {
       responseBody = await response.json();
     }
 

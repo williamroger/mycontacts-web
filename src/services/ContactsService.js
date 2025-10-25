@@ -20,6 +20,10 @@ class ContactsService {
   updateContact(id, contact) {
     return this.httpClient.put(`/contacts/${id}`, { body: contact });
   }
+
+  deleteContact(id) {
+    return this.httpClient.delete(`/contacts/${id}`);
+  }
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
