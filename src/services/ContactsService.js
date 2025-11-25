@@ -1,5 +1,6 @@
 import delay from '../utils/delay';
 import HttpClient from './utils/HttpClient';
+import ContactMapper from '../services/mappers/ContactMapper';
 
 class ContactsService {
   constructor() {
@@ -16,11 +17,13 @@ class ContactsService {
   }
 
   createContact(contact) {
-    return this.httpClient.post('/contacts', { body: contact });
+    const body = ContactMapper.toPersistence(contact);
+    return this.httpClient.post('/contacts', { body });
   }
 
   updateContact(id, contact) {
-    return this.httpClient.put(`/contacts/${id}`, { body: contact });
+    const body = ContactMapper.toPersistence(contact);
+    return this.httpClient.put(`/contacts/${id}`, { body });
   }
 
   deleteContact(id) {
