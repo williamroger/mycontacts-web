@@ -1,4 +1,3 @@
-import delay from '../utils/delay';
 import HttpClient from './utils/HttpClient';
 import ContactMapper from '../services/mappers/ContactMapper';
 
@@ -7,22 +6,27 @@ class ContactsService {
     this.httpClient = new HttpClient('http://localhost:3001');
   }
 
-  loadContacts(orderBy = 'asc') {
-    return this.httpClient.get(`/contacts?orderBy=${orderBy}`);
+  async loadContacts(orderBy = 'asc') {
+    const contacts = await this.httpClient.get(`/contacts?orderBy=${orderBy}`);
+
+    return contacts.map(contact => ContactMapper.toDomain(contact));
   }
 
   async getContactById(id) {
-    await delay(9000);
-    return this.httpClient.get(`/contacts/${id}`);
+    const contact = await this.httpClient.get(`/contacts/${id}`);
+
+    return ContactMapper.toDomain(contact);
   }
 
   createContact(contact) {
     const body = ContactMapper.toPersistence(contact);
+
     return this.httpClient.post('/contacts', { body });
   }
 
   updateContact(id, contact) {
     const body = ContactMapper.toPersistence(contact);
+
     return this.httpClient.put(`/contacts/${id}`, { body });
   }
 
