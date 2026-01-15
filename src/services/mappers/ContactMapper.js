@@ -1,6 +1,7 @@
 class Mapper {
   toPersistence(domainContact) {
     return {
+      id: domainContact.id,
       name: domainContact.name,
       email: domainContact.email,
       phone: domainContact.phone,
