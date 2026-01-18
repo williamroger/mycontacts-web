@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 
 import {
   Container,
-  Header,
   ListHeader,
   Card,
   ErrorContainer,
@@ -19,6 +18,7 @@ import Arrow from '../../assets/images/icons/arrow.svg';
 import Edit from '../../assets/images/icons/edit.svg';
 import Trash from '../../assets/images/icons/trash.svg';
 import useHome from './useHome';
+import Header from './components/Header';
 
 export default function Home() {
   const {
@@ -51,22 +51,10 @@ export default function Home() {
       )}
 
       <Header
-        justify={
-          hasError
-            ? 'flex-end'
-            : contacts.length > 0
-            ? 'space-between'
-            : 'center'
-        }
-      >
-        {!hasError && contacts.length > 0 && (
-          <strong>
-            {filteredContacts?.length}
-            {filteredContacts?.length === 1 ? ' contato' : ' contatos'}
-          </strong>
-        )}
-        <Link to="/new">Novo Contato</Link>
-      </Header>
+        hasError={hasError}
+        quantityOfContacts={contacts.length}
+        quantityOfFilteredContacts={filteredContacts.length}
+      />
 
       {hasError && (
         <ErrorContainer>
