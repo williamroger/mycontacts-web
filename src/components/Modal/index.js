@@ -1,4 +1,3 @@
-import { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { Overlay, Container, Footer } from './styles';
