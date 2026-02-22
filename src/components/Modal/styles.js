@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 const fadeIn = keyframes`
   from {
@@ -11,12 +11,32 @@ const fadeIn = keyframes`
   }
 `;
 
+const fadeOut = keyframes`
+  from {
+    /* Estilos iniciais */
+    opacity: 1;
+  }
+  to {
+    /* Estilos finais (como o elemento vai permanecer em tela) */
+    opacity: 0;
+  }
+`;
+
 const skaleIn = keyframes`
   from {
     transform: scale(0);
   }
   to {
     transform: scale(1);
+  }
+`;
+
+const skaleOut = keyframes`
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
   }
 `;
 
@@ -32,6 +52,11 @@ export const Overlay = styled.div`
   top: 0;
   left: 0;
   animation: ${fadeIn} 0.6s;
+  ${({ isLiving }) =>
+    isLiving &&
+    css`
+      animation: ${fadeOut} 0.6s forwards;
+    `}
 `;
 
 export const Container = styled.div`
@@ -42,6 +67,11 @@ export const Container = styled.div`
   padding: 24px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
   animation: ${skaleIn} 0.6s;
+  ${({ isLiving }) =>
+    isLiving &&
+    css`
+      animation: ${skaleOut} 0.6s forwards;
+    `}
 
   > h1 {
     font-size: 22px;
