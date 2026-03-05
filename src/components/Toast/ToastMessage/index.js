@@ -2,8 +2,10 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './styles';
 
-export default function ToastMessage({ message, onRemoveMessage }) {
+import { useAnimatedUnmount } from '../../../hooks/useAnimatedUnmount';
+export default function ToastMessage({ message, onRemoveMessage, isLeaving }) {
   const { id, text, type = 'default', duration } = message;
+  const { shouldRender, animatedElementRef} = useAnimatedUnmount(!isLeaving);
 
   function handleRemoveToast() {
     onRemoveMessage(id);
@@ -12,12 +14,16 @@ export default function ToastMessage({ message, onRemoveMessage }) {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       onRemoveMessage(id);
-    }, duration || 9000);
+    }, duration || 4000);
 
     return () => {
       clearTimeout(timeoutId);
     };
   }, [onRemoveMessage, id, duration]);
+
+  if (!shouldRender) {
+    return null;
+  }
 
   return (
     <Container
@@ -25,6 +31,8 @@ export default function ToastMessage({ message, onRemoveMessage }) {
       onClick={handleRemoveToast}
       tabIndex={0}
       role="button"
+      isLeaving={isLeaving}
+      ref={animatedElementRef}
     >
       <strong>{text}</strong>
     </Container>
@@ -39,4 +47,5 @@ ToastMessage.propTypes = {
     duration: PropTypes.number,
   }).isRequired,
   onRemoveMessage: PropTypes.func.isRequired,
+  isLeaving: PropTypes.bool.isRequired,
 };
