@@ -1,40 +1,49 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './styles';
+export default function ToastMessage({ message, onRemoveMessage, isLeaving, onAnimationEnd }) {
+  const animatedElementRef = useRef(null);
 
-import { useAnimatedUnmount } from '../../../hooks/useAnimatedUnmount';
-export default function ToastMessage({ message, onRemoveMessage, isLeaving }) {
-  const { id, text, type = 'default', duration } = message;
-  const { shouldRender, animatedElementRef} = useAnimatedUnmount(!isLeaving);
+  useEffect(() => {
+    function handleAnimationEnd() {
+      onAnimationEnd(message.id);
+    }
+
+    const elementRef = animatedElementRef.current;
+
+    if (isLeaving) {
+      elementRef.addEventListener('animationend', handleAnimationEnd);
+    }
+
+    return () => {
+      elementRef.removeEventListener('animationend', handleAnimationEnd);
+    };
+  }, [isLeaving, onAnimationEnd, message.id]);
 
   function handleRemoveToast() {
-    onRemoveMessage(id);
+    onRemoveMessage(message.id);
   }
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      onRemoveMessage(id);
-    }, duration || 4000);
+      onRemoveMessage(message.id);
+    }, message.duration || 4000);
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [onRemoveMessage, id, duration]);
-
-  if (!shouldRender) {
-    return null;
-  }
+  }, [onRemoveMessage, message.id, message.duration]);
 
   return (
     <Container
-      type={type}
+      type={message.type}
       onClick={handleRemoveToast}
       tabIndex={0}
       role="button"
       isLeaving={isLeaving}
       ref={animatedElementRef}
     >
-      <strong>{text}</strong>
+      <strong>{message.text}</strong>
     </Container>
   );
 }
@@ -48,4 +57,5 @@ ToastMessage.propTypes = {
   }).isRequired,
   onRemoveMessage: PropTypes.func.isRequired,
   isLeaving: PropTypes.bool.isRequired,
+  onAnimationEnd: PropTypes.func.isRequired,
 };

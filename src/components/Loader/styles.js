@@ -29,8 +29,8 @@ export const OverLay = styled.div`
   align-items: center;
   justify-content: center;
   animation: ${fadeIn} 0.6s;
-  ${({ isLiving }) =>
-    isLiving &&
+  ${({ isLeaving }) =>
+    isLeaving &&
     css`
       animation: ${fadeOut} 0.6s forwards;
     `}

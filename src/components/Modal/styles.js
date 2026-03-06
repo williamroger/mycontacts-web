@@ -52,8 +52,8 @@ export const Overlay = styled.div`
   top: 0;
   left: 0;
   animation: ${fadeIn} 0.6s;
-  ${({ isLiving }) =>
-    isLiving &&
+  ${({ isLeaving }) =>
+    isLeaving &&
     css`
       animation: ${fadeOut} 0.6s forwards;
     `}
@@ -67,8 +67,8 @@ export const Container = styled.div`
   padding: 24px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
   animation: ${skaleIn} 0.6s;
-  ${({ isLiving }) =>
-    isLiving &&
+  ${({ isLeaving }) =>
+    isLeaving &&
     css`
       animation: ${skaleOut} 0.6s forwards;
     `}
